@@ -1,14 +1,4 @@
-import { TaxBreakdown } from "@/components/tax-form/types";
-
-interface TaxBracket {
-  min: number;
-  max?: number;
-  rate: number;
-}
-
-interface TaxBrackets {
-  tax_brackets: TaxBracket[];
-}
+import { TaxBrackets, TaxBreakdown } from "@/components/tax-form/types";
 
 export const getTaxBracketBreakdown = (
   salary: number,
@@ -44,7 +34,7 @@ const calculateTax = (salary: number, taxBrackets: TaxBrackets): number[] => {
         : salary - bracket.min;
       /** Then simply multiply the rate by the delta calculated above */
       const tax = taxableIncome * bracket.rate;
-      taxAmounts.push(tax);
+      taxAmounts.push(Number(tax.toFixed(2)));
     }
   }
 
