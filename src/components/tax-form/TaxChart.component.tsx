@@ -10,8 +10,11 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { TaxBreakdown } from "@/components/tax-form/utils";
+import { TaxBreakdown } from "@/components/tax-form/types";
 
+/**
+ * Purpose of this chart is to more elegantly show the bracket breakdown of owed taxes.
+ */
 const TaxChart = (props: { data: TaxBreakdown[] }) => {
   const { data } = props;
   return (

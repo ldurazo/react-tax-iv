@@ -17,13 +17,19 @@ import { getTaxBracketBreakdown } from "@/components/tax-form/utils";
 import dynamic from "next/dynamic";
 import ErrorComponent from "@/components/error/error.component";
 
+/** This library doesn't play well with SSR, loading in the client */
 const TaxChart = dynamic(
   () => import("@/components/tax-form/TaxChart.component"),
   { ssr: false },
 );
 
+/**
+ *  Tax Form component is in charge of orchestrating state and display for the form and the results of the calculations.
+ */
 const TaxFormComponent: React.FC = () => {
   const t = useTranslations();
+
+  /** Leverage hook forms for state management in forms, often better than handcrafted solutions */
   const {
     register,
     handleSubmit,
@@ -41,6 +47,7 @@ const TaxFormComponent: React.FC = () => {
     error,
     isFetching,
   } = useQuery({
+    /** The client will cache locally each year, instead of sending a fetch on every selection change, lasts for a minute */
     queryKey: ["taxBrackets", yearSelect],
     queryFn: () => fetchTaxBrackets(getValues("yearSelect")),
   });
@@ -55,6 +62,10 @@ const TaxFormComponent: React.FC = () => {
     setSubmittedSalary(formData.numberInput);
   };
 
+  /**
+   * Some people like to wrap these render function variables into useMemo, I think this should not be the default,
+   *  as memoizing some of these items is more costly in the first render than they are to simply recalculate every time
+   */
   const chartData =
     submittedSalary && taxBracketData
       ? getTaxBracketBreakdown(submittedSalary, taxBracketData)

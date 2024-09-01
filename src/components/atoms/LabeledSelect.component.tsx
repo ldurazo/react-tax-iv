@@ -13,6 +13,9 @@ interface LabeledSelectProps {
   error?: FieldError;
 }
 
+/**
+ * General purpose labeled dropdown selector
+ */
 const LabeledSelect: React.FC<LabeledSelectProps> = ({
   id,
   label,

@@ -8,6 +8,9 @@ interface ButtonProps {
   children: React.ReactNode;
 }
 
+/**
+ * General purpose atomic button
+ */
 const Button: React.FC<ButtonProps> = ({ type, disabled, children }) => {
   return (
     <button

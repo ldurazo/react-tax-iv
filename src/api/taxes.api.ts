@@ -4,6 +4,9 @@ interface TaxApiErrors {
   errors: { code: string; message: string }[];
 }
 
+/**
+ * Best guess attempt at catching general errors from the API
+ */
 function handleErrorsIfAny(response: Response) {
   if (!response.ok) {
     throw new Error("An unknown error has occurred");
@@ -17,6 +20,10 @@ function handleErrorsIfAny(response: Response) {
   }
 }
 
+/**
+ * GET request for tax bracket information.
+ *  keyed by the year in the upstream cache utilities
+ */
 export const fetchTaxBrackets = async (
   year: keyof typeof TAX_BRACKET_ROUTES,
 ) => {

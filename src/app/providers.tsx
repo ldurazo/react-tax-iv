@@ -12,7 +12,7 @@ const makeQueryClient = () =>
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000,
-        retry: 3,
+        retry: 3, // API is, purposely ;) erratic.
       },
     },
   });
@@ -33,9 +33,13 @@ const getQueryClient = () => {
   }
 };
 
+/**
+ * All providers for client side components must register here.
+ *
+ * FIXME: If you add more, find a better home for React Query's utilities.
+ */
 const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = getQueryClient();
-
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

@@ -3,6 +3,9 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 
+/**
+ * Lower-level error component to use on pages or app segments.
+ */
 const Error: React.FC = () => {
   const t = useTranslations();
 

@@ -12,6 +12,9 @@ interface LabeledInputProps {
   error?: FieldError;
 }
 
+/**
+ * General purpose labeled input of various types
+ */
 const LabeledInput: React.FC<LabeledInputProps> = ({
   id,
   type,
