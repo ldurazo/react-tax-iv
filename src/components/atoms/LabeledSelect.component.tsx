@@ -2,7 +2,6 @@
 
 import React from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { useTranslations } from "next-intl";
 
 interface LabeledSelectProps {
   id: string;
@@ -24,15 +23,13 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
   register,
   error,
 }) => {
-  const t = useTranslations();
-
   return (
     <div className="w-full">
       <label
         htmlFor={id}
         className="block text-gray-600 font-bold md:text-left md:m-1"
       >
-        {t(label)}
+        {label}
       </label>
       <select
         id={id}

@@ -71,6 +71,7 @@ const TaxFormComponent: React.FC = () => {
       ? getTaxBracketBreakdown(submittedSalary, taxBracketData)
       : null;
 
+  /** Total tax in a single display */
   const totalTax = chartData
     ? chartData.reduce((acc, item) => acc + item.tax, 0)
     : 0;
@@ -83,7 +84,7 @@ const TaxFormComponent: React.FC = () => {
       <LabeledInput
         id="numberInput"
         type="number"
-        label="enterYourSalary"
+        label={t("enterYourSalary")}
         register={register("numberInput", {
           required: t("requiredField"),
           min: { value: 1, message: t("minimumValue") },
@@ -92,7 +93,7 @@ const TaxFormComponent: React.FC = () => {
       />
       <LabeledSelect
         id="yearSelect"
-        label="yearSelect"
+        label={t("yearSelect")}
         options={TAX_YEAR_OPTIONS}
         defaultValue={DEFAULT_PREFETCH_YEAR}
         register={register("yearSelect", {
