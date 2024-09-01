@@ -1,0 +1,9 @@
+{
+  "enterYourSalary": "Enter your salary",
+  "yearSelect": "Year Select",
+  "submit": "Submit",
+  "submittedSalary": "Submitted Salary",
+  "selectAYear": "Select a year",
+  "requiredField": "This field is required",
+  "minimumValue": "Minimum value is 1"
+}

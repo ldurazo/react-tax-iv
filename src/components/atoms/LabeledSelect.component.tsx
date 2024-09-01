@@ -2,6 +2,7 @@
 
 import React from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 interface LabeledSelectProps {
   id: string;
@@ -18,13 +19,15 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
   register,
   error,
 }) => {
+  const t = useTranslations();
+
   return (
     <div className="w-full">
       <label
         htmlFor={id}
         className="block text-gray-600 font-bold md:text-left md:m-1"
       >
-        {label}
+        {t(label)}
       </label>
       <select
         id={id}
@@ -35,11 +38,13 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
-            {option.label}
+            {t(option.label)}
           </option>
         ))}
       </select>
-      {error && <p className="text-sm text-red-600">{error.message}</p>}
+      {error && error.message ? (
+        <p className="text-sm text-red-600">{t(error.message)}</p>
+      ) : null}
     </div>
   );
 };

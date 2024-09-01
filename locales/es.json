@@ -1,0 +1,9 @@
+{
+  "enterYourSalary": "Ingrese su salario",
+  "yearSelect": "Seleccione año",
+  "submit": "Enviar",
+  "submittedSalary": "Salario",
+  "selectAYear": "Seleccione un año",
+  "requiredField": "Este campo es obligatorio",
+  "minimumValue": "Debe ser mayor a 0"
+}

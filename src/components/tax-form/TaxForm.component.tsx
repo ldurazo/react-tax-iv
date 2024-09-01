@@ -7,8 +7,10 @@ import LabeledInput from "@/components/atoms/LabeledInput.component";
 import LabeledSelect from "@/components/atoms/LabeledSelect.component";
 import Button from "@/components/atoms/Button.component";
 import { TAX_YEAR_OPTIONS } from "@/utils/constants";
+import { useTranslations } from "next-intl";
 
 const TaxFormComponent: React.FC = () => {
+  const t = useTranslations();
   const {
     register,
     handleSubmit,
@@ -29,29 +31,29 @@ const TaxFormComponent: React.FC = () => {
       <LabeledInput
         id="numberInput"
         type="number"
-        label="Enter your salary"
+        label="enterYourSalary"
         register={register("numberInput", {
-          required: "This field is required",
-          min: { value: 1, message: "Minimum value is 1" },
+          required: t("requiredField"),
+          min: { value: 1, message: t("minimumValue") },
         })}
         error={errors.numberInput}
       />
       <LabeledSelect
         id="yearSelect"
-        label="Year Select"
+        label="yearSelect"
         options={TAX_YEAR_OPTIONS}
         register={register("yearSelect", {
-          required: "This field is required",
+          required: t("requiredField"),
         })}
         error={errors.yearSelect}
       />
 
-      <Button type="submit">Submit</Button>
+      <Button type="submit">{t("submit")}</Button>
 
       {submittedSalary ? (
         <div className="w-full max-w-md">
           <p className="text-sm text-gray-700">
-            Submitted Salary: {submittedSalary}
+            {t("submittedSalary")}: {submittedSalary}
           </p>
         </div>
       ) : null}
