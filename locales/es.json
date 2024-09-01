@@ -8,5 +8,6 @@
   "minimumValue": "Debe ser mayor a 0",
   "somethingBadHappened": "Oh no, sucedió un error, intenta de nuevo",
   "refresh": "Reintentar",
-  "loading": "Cargando"
+  "loading": "Cargando",
+  "totalTaxToPay": "Impuesto debido"
 }

@@ -8,5 +8,6 @@
   "minimumValue": "Minimum value is 1",
   "somethingBadHappened": "Something bad happened, please press the button to refresh",
   "refresh": "Refresh",
-  "loading": "Loading"
+  "loading": "Loading",
+  "totalTaxToPay": "Owed tax"
 }

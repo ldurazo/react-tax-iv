@@ -13,7 +13,14 @@ import {
   DEFAULT_PREFETCH_YEAR,
   TAX_YEAR_OPTIONS,
 } from "@/components/tax-form/constants";
+import { getTaxBracketBreakdown } from "@/components/tax-form/utils";
+import dynamic from "next/dynamic";
 import ErrorComponent from "@/components/error/error.component";
+
+const TaxChart = dynamic(
+  () => import("@/components/tax-form/TaxChart.component"),
+  { ssr: false },
+);
 
 const TaxFormComponent: React.FC = () => {
   const t = useTranslations();
@@ -48,10 +55,19 @@ const TaxFormComponent: React.FC = () => {
     setSubmittedSalary(formData.numberInput);
   };
 
+  const chartData =
+    submittedSalary && taxBracketData
+      ? getTaxBracketBreakdown(submittedSalary, taxBracketData)
+      : null;
+
+  const totalTax = chartData
+    ? chartData.reduce((acc, item) => acc + item.tax, 0)
+    : 0;
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center"
+      className="flex flex-col items-center w-1/2"
     >
       <LabeledInput
         id="numberInput"
@@ -76,12 +92,13 @@ const TaxFormComponent: React.FC = () => {
       <Button type="submit" disabled={isFetching || Boolean(error)}>
         {isFetching ? t("loading") : t("submit")}
       </Button>
-      {submittedSalary ? (
-        <div className="w-full max-w-md">
-          <p className="text-sm text-gray-700">
-            {t("submittedSalary")}: {submittedSalary}
+      {chartData ? (
+        <>
+          <TaxChart data={chartData} />
+          <p className="mt-4 text-lg">
+            {t("totalTaxToPay")}: {totalTax.toFixed(2)}
           </p>
-        </div>
+        </>
       ) : null}
     </form>
   );

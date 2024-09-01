@@ -8,10 +8,25 @@ interface TaxBrackets {
   tax_brackets: TaxBracket[];
 }
 
-export const calculateTax = (
+export type TaxBreakdown = { name: string; tax: number };
+
+export const getTaxBracketBreakdown = (
   salary: number,
   taxBrackets: TaxBrackets,
-): number[] => {
+): TaxBreakdown[] => {
+  const taxAmounts = calculateTax(salary, taxBrackets);
+
+  return taxAmounts
+    .map((t, i) => {
+      return {
+        name: `Bracket ${i + 1}`,
+        tax: t,
+      };
+    })
+    .filter((t) => t.tax > 0);
+};
+
+const calculateTax = (salary: number, taxBrackets: TaxBrackets): number[] => {
   const taxAmounts: number[] = [];
 
   for (const bracket of taxBrackets.tax_brackets) {
