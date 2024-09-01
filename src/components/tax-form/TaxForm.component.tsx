@@ -8,6 +8,8 @@ import LabeledSelect from "@/components/atoms/LabeledSelect.component";
 import Button from "@/components/atoms/Button.component";
 import { TAX_YEAR_OPTIONS } from "@/utils/constants";
 import { useTranslations } from "next-intl";
+import { useQuery } from "@tanstack/react-query";
+import { fetchTaxBrackets } from "@/api/taxes.api";
 
 const TaxFormComponent: React.FC = () => {
   const t = useTranslations();
@@ -16,6 +18,14 @@ const TaxFormComponent: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
+  const { data } = useQuery({
+    queryKey: ["taxBrackets"],
+    queryFn: () => fetchTaxBrackets(),
+  });
+
+  // TODO ldurazo: do something with this ;)
+  console.log(data);
 
   const [submittedSalary, setSubmittedSalary] = useState<number | null>(null);
 
