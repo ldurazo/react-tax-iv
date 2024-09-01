@@ -38,7 +38,7 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
-            {t(option.label)}
+            {option.label}
           </option>
         ))}
       </select>
