@@ -38,7 +38,7 @@ const LabeledInput: React.FC<LabeledInputProps> = ({
         }`}
       />
       {error && error.message ? (
-        <p className="text-sm text-red-600">{t(error.message)}</p>
+        <p className="text-sm text-red-600">{error.message}</p>
       ) : null}
     </div>
   );

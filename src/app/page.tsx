@@ -5,13 +5,14 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { fetchTaxBrackets } from "@/api/taxes.api";
+import { DEFAULT_PREFETCH_YEAR } from "@/components/tax-form/constants";
 
 export default async function TaxCalculator() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ["taxBrackets"],
-    queryFn: fetchTaxBrackets,
+    queryFn: () => fetchTaxBrackets(DEFAULT_PREFETCH_YEAR),
   });
 
   return (

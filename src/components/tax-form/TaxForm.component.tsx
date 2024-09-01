@@ -1,37 +1,44 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData } from "@/components/tax-form/types";
 import LabeledInput from "@/components/atoms/LabeledInput.component";
 import LabeledSelect from "@/components/atoms/LabeledSelect.component";
 import Button from "@/components/atoms/Button.component";
-import { TAX_YEAR_OPTIONS } from "@/utils/constants";
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTaxBrackets } from "@/api/taxes.api";
+import { TAX_YEAR_OPTIONS } from "@/components/tax-form/constants";
 
 const TaxFormComponent: React.FC = () => {
   const t = useTranslations();
   const {
     register,
     handleSubmit,
+    getValues,
+    watch,
     formState: { errors },
   } = useForm<FormData>();
 
-  const { data } = useQuery({
-    queryKey: ["taxBrackets"],
-    queryFn: () => fetchTaxBrackets(),
-  });
+  const yearSelect = watch("yearSelect");
 
-  // TODO ldurazo: do something with this ;)
-  console.log(data);
+  const { data: queryData, refetch } = useQuery({
+    queryKey: ["taxBrackets"],
+    queryFn: () => fetchTaxBrackets(getValues("yearSelect")),
+  });
 
   const [submittedSalary, setSubmittedSalary] = useState<number | null>(null);
 
   const onSubmit = (data: FormData) => {
     setSubmittedSalary(data.numberInput);
   };
+
+  useEffect(() => {
+    if (yearSelect) {
+      (async () => await refetch())();
+    }
+  }, [yearSelect, refetch]);
 
   return (
     <form

@@ -32,6 +32,7 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
       <select
         id={id}
         {...register}
+        defaultValue={options[options.length - 1].value}
         className={`border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none ${
           error ? "border-red-500" : "border-gray-200 focus:border-purple-500"
         }`}
@@ -43,7 +44,7 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
         ))}
       </select>
       {error && error.message ? (
-        <p className="text-sm text-red-600">{t(error.message)}</p>
+        <p className="text-sm text-red-600">{error.message}</p>
       ) : null}
     </div>
   );
