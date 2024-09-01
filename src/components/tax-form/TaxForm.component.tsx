@@ -2,11 +2,9 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
-interface FormData {
-  numberInput: number;
-  yearSelect: string;
-}
+import { FormData } from "@/components/tax-form/types";
+import TaxFormSalaryInput from "./TaxFormSalaryInput.component";
+import TaxFormYearSelect from "./TaxFormYearSelect.component";
 
 const TaxFormComponent: React.FC = () => {
   const {
@@ -25,69 +23,23 @@ const TaxFormComponent: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center"
     >
-      <div className="w-full max-w-md">
-        <label
-          htmlFor="numberInput"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
-          Enter your salary
-        </label>
-        <input
-          id="numberInput"
-          type="number"
-          {...register("numberInput", {
-            required: "This field is required",
-            min: { value: 1, message: "Minimum value is 1" },
-          })}
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-4"
-        />
-        {errors.numberInput && (
-          <p className="text-sm text-red-600 mb-4">
-            {errors.numberInput.message}
-          </p>
-        )}
-      </div>
-
-      <div className="w-full max-w-md">
-        <label
-          htmlFor="yearSelect"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
-          Year Select
-        </label>
-        <select
-          id="yearSelect"
-          defaultValue="2022"
-          {...register("yearSelect", { required: "This field is required" })}
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-4"
-        >
-          <option value="">Select a year</option>
-          <option value="2019">2019</option>
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-          <option value="2022">2022</option>
-        </select>
-        {errors.yearSelect && (
-          <p className="text-sm text-red-600 mb-4">
-            {errors.yearSelect.message}
-          </p>
-        )}
-      </div>
+      <TaxFormSalaryInput register={register} errors={errors} />
+      <TaxFormYearSelect register={register} errors={errors} />
 
       <button
         type="submit"
-        className="w-full max-w-md px-4 py-2 bg-blue-500 text-white rounded-md mb-4"
+        className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
       >
         Submit
       </button>
 
-      {submittedSalary !== null && (
+      {submittedSalary ? (
         <div className="w-full max-w-md">
           <p className="text-sm text-gray-700">
             Submitted Salary: {submittedSalary}
           </p>
         </div>
-      )}
+      ) : null}
     </form>
   );
 };
