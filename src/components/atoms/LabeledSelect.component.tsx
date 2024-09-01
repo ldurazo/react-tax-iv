@@ -8,6 +8,7 @@ interface LabeledSelectProps {
   id: string;
   label: string;
   options: { value: string; label: string }[];
+  defaultValue?: string;
   register: UseFormRegisterReturn;
   error?: FieldError;
 }
@@ -16,6 +17,7 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
   id,
   label,
   options,
+  defaultValue,
   register,
   error,
 }) => {
@@ -32,7 +34,7 @@ const LabeledSelect: React.FC<LabeledSelectProps> = ({
       <select
         id={id}
         {...register}
-        defaultValue={options[options.length - 1].value}
+        defaultValue={defaultValue}
         className={`border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none ${
           error ? "border-red-500" : "border-gray-200 focus:border-purple-500"
         }`}

@@ -5,5 +5,8 @@
   "submittedSalary": "Submitted Salary",
   "selectAYear": "Select a year",
   "requiredField": "This field is required",
-  "minimumValue": "Minimum value is 1"
+  "minimumValue": "Minimum value is 1",
+  "somethingBadHappened": "Something bad happened, please press the button to refresh",
+  "refresh": "Refresh",
+  "loading": "Loading"
 }

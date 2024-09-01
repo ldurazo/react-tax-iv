@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData } from "@/components/tax-form/types";
 import LabeledInput from "@/components/atoms/LabeledInput.component";
@@ -9,7 +9,11 @@ import Button from "@/components/atoms/Button.component";
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTaxBrackets } from "@/api/taxes.api";
-import { TAX_YEAR_OPTIONS } from "@/components/tax-form/constants";
+import {
+  DEFAULT_PREFETCH_YEAR,
+  TAX_YEAR_OPTIONS,
+} from "@/components/tax-form/constants";
+import ErrorComponent from "@/components/error/error.component";
 
 const TaxFormComponent: React.FC = () => {
   const t = useTranslations();
@@ -19,26 +23,30 @@ const TaxFormComponent: React.FC = () => {
     getValues,
     watch,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: { yearSelect: DEFAULT_PREFETCH_YEAR },
+  });
 
   const yearSelect = watch("yearSelect");
 
-  const { data: queryData, refetch } = useQuery({
-    queryKey: ["taxBrackets"],
+  const {
+    data: taxBracketData,
+    error,
+    isFetching,
+  } = useQuery({
+    queryKey: ["taxBrackets", yearSelect],
     queryFn: () => fetchTaxBrackets(getValues("yearSelect")),
   });
 
   const [submittedSalary, setSubmittedSalary] = useState<number | null>(null);
 
-  const onSubmit = (data: FormData) => {
-    setSubmittedSalary(data.numberInput);
-  };
+  if (error) {
+    return <ErrorComponent />;
+  }
 
-  useEffect(() => {
-    if (yearSelect) {
-      (async () => await refetch())();
-    }
-  }, [yearSelect, refetch]);
+  const onSubmit = (formData: FormData) => {
+    setSubmittedSalary(formData.numberInput);
+  };
 
   return (
     <form
@@ -59,14 +67,15 @@ const TaxFormComponent: React.FC = () => {
         id="yearSelect"
         label="yearSelect"
         options={TAX_YEAR_OPTIONS}
+        defaultValue={DEFAULT_PREFETCH_YEAR}
         register={register("yearSelect", {
           required: t("requiredField"),
         })}
         error={errors.yearSelect}
       />
-
-      <Button type="submit">{t("submit")}</Button>
-
+      <Button type="submit" disabled={isFetching || Boolean(error)}>
+        {isFetching ? t("loading") : t("submit")}
+      </Button>
       {submittedSalary ? (
         <div className="w-full max-w-md">
           <p className="text-sm text-gray-700">
