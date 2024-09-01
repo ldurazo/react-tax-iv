@@ -13,8 +13,9 @@ export const getTaxBracketBreakdown = (
     taxAmounts
       /** Shape we want for the chart */
       .map((t, i) => {
+        const number = taxBrackets.tax_brackets[i].rate * 100;
         return {
-          name: `Bracket ${i + 1}`,
+          name: `At rate ${number.toFixed(1)}%`,
           tax: t,
         };
       })

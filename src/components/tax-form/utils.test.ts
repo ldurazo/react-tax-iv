@@ -47,8 +47,8 @@ describe("getTaxBracketBreakdown", () => {
     const salary = 60000;
     const result = getTaxBracketBreakdown(salary, firstBracket);
     expect(result).toEqual([
-      { name: "Bracket 1", tax: 7529.55 },
-      { name: "Bracket 2", tax: 2009.61 },
+      { name: "At rate 15.0%", tax: 7529.55 },
+      { name: "At rate 20.5%", tax: 2009.61 },
     ]);
   });
 
@@ -56,9 +56,9 @@ describe("getTaxBracketBreakdown", () => {
     const salary = 120000;
     const result = getTaxBracketBreakdown(salary, secondBracket);
     expect(result).toEqual([
-      { name: "Bracket 1", tax: 7353 },
-      { name: "Bracket 2", tax: 10049.1 },
-      { name: "Bracket 3", tax: 5709.6 },
+      { name: "At rate 15.0%", tax: 7353 },
+      { name: "At rate 20.5%", tax: 10049.1 },
+      { name: "At rate 26.0%", tax: 5709.6 },
     ]);
   });
 
@@ -66,10 +66,10 @@ describe("getTaxBracketBreakdown", () => {
     const salary = 200000;
     const result = getTaxBracketBreakdown(salary, thirdBracket);
     expect(result).toEqual([
-      { name: "Bracket 1", tax: 7280.25 },
-      { name: "Bracket 2", tax: 9949.47 },
-      { name: "Bracket 3", tax: 13885.04 },
-      { name: "Bracket 4", tax: 14362.83 },
+      { name: "At rate 15.0%", tax: 7280.25 },
+      { name: "At rate 20.5%", tax: 9949.47 },
+      { name: "At rate 26.0%", tax: 13885.04 },
+      { name: "At rate 29.0%", tax: 14362.83 },
     ]);
   });
 
@@ -77,11 +77,11 @@ describe("getTaxBracketBreakdown", () => {
     const salary = 250000;
     const result = getTaxBracketBreakdown(salary, fourthBracket);
     expect(result).toEqual([
-      { name: "Bracket 1", tax: 7144.5 },
-      { name: "Bracket 2", tax: 9763.94 },
-      { name: "Bracket 3", tax: 13626.08 },
-      { name: "Bracket 4", tax: 18184.16 },
-      { name: "Bracket 5", tax: 13077.57 },
+      { name: "At rate 15.0%", tax: 7144.5 },
+      { name: "At rate 20.5%", tax: 9763.94 },
+      { name: "At rate 26.0%", tax: 13626.08 },
+      { name: "At rate 29.0%", tax: 18184.16 },
+      { name: "At rate 33.0%", tax: 13077.57 },
     ]);
   });
 });
