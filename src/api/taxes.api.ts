@@ -7,7 +7,7 @@ interface TaxApiErrors {
 /**
  * Best guess attempt at catching general errors from the API
  */
-function handleErrorsIfAny(response: Response) {
+const handleErrorsIfAny = (response: Response) => {
   if (!response.ok) {
     throw new Error("An unknown error has occurred");
   }
@@ -18,7 +18,7 @@ function handleErrorsIfAny(response: Response) {
     }
     throw new Error("An unknown error has occurred");
   }
-}
+};
 
 /**
  * GET request for tax bracket information.
