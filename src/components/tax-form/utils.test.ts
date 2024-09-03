@@ -43,7 +43,7 @@ const fourthBracket: TaxBrackets = {
 };
 
 describe("getTaxBracketBreakdown", () => {
-  it("should calculate tax breakdown correctly for fixture firstBracket", () => {
+  it("calculates tax breakdown correctly for firstBracket", () => {
     const salary = 60000;
     const result = getTaxBracketBreakdown(salary, firstBracket);
     expect(result).toEqual([
@@ -52,7 +52,7 @@ describe("getTaxBracketBreakdown", () => {
     ]);
   });
 
-  it("should calculate tax breakdown correctly for fixture secondBracket", () => {
+  it("calculates tax breakdown correctly for secondBracket", () => {
     const salary = 120000;
     const result = getTaxBracketBreakdown(salary, secondBracket);
     expect(result).toEqual([
@@ -62,7 +62,7 @@ describe("getTaxBracketBreakdown", () => {
     ]);
   });
 
-  it("should calculate tax breakdown correctly for fixture thirdBracket", () => {
+  it("calculates tax breakdown correctly for thirdBracket", () => {
     const salary = 200000;
     const result = getTaxBracketBreakdown(salary, thirdBracket);
     expect(result).toEqual([
@@ -73,7 +73,7 @@ describe("getTaxBracketBreakdown", () => {
     ]);
   });
 
-  it("should calculate tax breakdown correctly for fixture fourthBracket", () => {
+  it("calculates tax breakdown correctly for fourthBracket", () => {
     const salary = 250000;
     const result = getTaxBracketBreakdown(salary, fourthBracket);
     expect(result).toEqual([
