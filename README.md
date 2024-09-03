@@ -10,3 +10,15 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Technologies used
+- Next.js as the React framework of choice, primarily for SSR capabilities.
+- React Query (Tanstack) for data synchronization / (server) state management.
+- React Hook Forms library for form state machines.
+- Typescript for all your type-safety pleasures.
+- Jest for unit tests
+
+### TODO
+- Add Cypress component tests
+- Add Cypress E2E tests
+- Increase jest coverage of server & client components
