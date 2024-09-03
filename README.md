@@ -13,12 +13,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Technologies used
 - Next.js as the React framework of choice, primarily for SSR capabilities.
+  - next-intl for localization.
 - React Query (Tanstack) for data synchronization / (server) state management.
 - React Hook Forms library for form state machines.
 - Typescript for all your type-safety pleasures.
-- Jest for unit tests
+- Jest for unit tests.
+- Recharts as a minor dependency for graphs.
+- prettier/eslint to get styling out of the way day one.
 
 ### TODO
-- Add Cypress component tests
-- Add Cypress E2E tests
-- Increase jest coverage of server & client components
+- Add Cypress component tests.
+- Add Cypress E2E tests.
+- Increase jest coverage of server & client components.
