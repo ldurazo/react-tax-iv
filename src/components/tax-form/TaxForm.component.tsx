@@ -87,7 +87,7 @@ const TaxFormComponent: React.FC = () => {
         label={t("enterYourSalary")}
         register={register("numberInput", {
           required: t("requiredField"),
-          min: { value: 1, message: t("minimumValue") },
+          min: { value: 0, message: t("minimumValue") },
         })}
         error={errors.numberInput}
       />
@@ -106,7 +106,9 @@ const TaxFormComponent: React.FC = () => {
       </Button>
       {chartData ? (
         <>
-          <TaxChart data={chartData} />
+          {submittedSalary && submittedSalary > 0 ? (
+            <TaxChart data={chartData} />
+          ) : null}
           <p className="mt-4 text-lg">
             {t("totalTaxToPay")}: {totalTax.toFixed(2)}
           </p>
